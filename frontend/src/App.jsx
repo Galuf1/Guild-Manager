@@ -2,7 +2,9 @@ import { useState } from 'react'
 import './App.css'
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import SignupPage from './pages/SignupPage' 
+import SignupPage from './pages/SignupPage'
+import LoginPage from './pages/LoginPage' 
+import ManagerPage from './pages/ManagerPage'
 
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage user={user} />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path='/guild' element={<ManagerPage />} />
         </Routes>
       </Router>
     </div>

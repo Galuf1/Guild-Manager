@@ -1,17 +1,15 @@
 import {Link} from 'react-router-dom'
 
-function HomePage ({user}) {
+function GameManager ({user}) {
 
     return (
         <section>
-            <h1>Guild Manager</h1>
+            <h1>Hello {user}</h1>
             <Link to="/login">Login</Link>
             <br />
             <Link to="/signup">Signup</Link>
-            <br />
-            <Link to="/guild">Guild</Link>
         </section>
     )
 }
 
-export default HomePage
+export default GameManager

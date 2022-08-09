@@ -1,18 +1,27 @@
 import axios from "axios";
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import { Link, useNavigate } from 'react-router-dom'
+import { useState } from "react";
 
 function SignupPage() {
     let navigate = useNavigate()
+    
 
-    async function handleSubmit(event) {
-        event.preventdefault()
-        await submitForm(event.target)
-        navigate("/", { replace: true})
+   
+    const handleSubmit = (event) => {
+        axios.post('/signup', {
+            'email': event.target[0].value,
+            'password': event.target[1].value
+        }).then((response) => {
+            console.log('wat you are in react')
+            navigate('/')
+        })
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+       
+        <form onSubmit={handleSubmit} >
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control type="email" placeholder="Enter Email" />
@@ -20,6 +29,7 @@ function SignupPage() {
                     We'll never share your email with anyone else.
                 </Form.Text>
             </Form.Group>
+            
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" />
@@ -31,6 +41,7 @@ function SignupPage() {
                 Submit
             </Button>                       
         </form>
+        
     )
 }
 

@@ -13,17 +13,24 @@ def index(request):
     index = open('static/index.html').read()
     return HttpResponse(index)
 
-@api_view(['POST'])
+@api_view(['POST','GET'])
 def sign_up(request):
     print('signup is loading wtf')
-    try:
-        User.objects.create_user(username=request.data['email'], password=request.data['password'], email=request.data['email'])
+    if request.method == 'POST':
+        try:
+            new_user = User.objects.create_user(username=request.data['email'], password=request.data['password'], email=request.data['email'])
+            new_user.full_clean
+            new_user.save()
+            return JsonResponse({'success':True})
+            # return HttpResponse({'success':'whatever'})
+        except Exception as e:
+            print('you got an error signing up!', str(e))
+        return JsonResponse({'Success': False, 'reason': 'sign up failed'})
+    elif request.method == 'GET':
         return JsonResponse({'success':True})
-    except Exception as e:
-        print('you got an error signing up!', str(e))
-    return JsonResponse({'Success': False, 'reason': 'sign up failed'})
 
-@api_view(['POST','GET'])
+
+@api_view(['POST'])
 def log_in(request):
     print('YOU ARE IN THE LOG IN VIEW ON DJANGO')
     email = request.data['email']
