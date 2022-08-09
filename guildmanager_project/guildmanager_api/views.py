@@ -66,7 +66,14 @@ def guild(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = GuildSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-        return Response(serializer.data)
+        print(request.data)
+        guild = Guild(name=request.data['name'],faction=request.data['faction'], server=request.data['server'], description_short=request.data['description_short'], description_full=request.data['description_full'])
+        guild.save()
+        guild.game.set([2])
+        guild.save()
+        # serializer = GuildSerializer(data=request.data)
+        # print(serializer)
+        # if serializer.is_valid():
+        #     print('success', serializer.is_valid())
+        #     serializer.save(game=[2])
+        return Response('hello')
