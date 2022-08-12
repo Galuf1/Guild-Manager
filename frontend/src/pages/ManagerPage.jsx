@@ -10,7 +10,6 @@ function ManagerPage ({user}) {
     const handleSubmit = (event) => {
         axios.post('/guild', {
             'name': event.target[0].value,
-            // 'game': event.target[1].value,
             'faction': event.target[2].value,
             'server': event.target[3].value,
             'description_short': event.target[4].value,

@@ -12,7 +12,7 @@ Administrator and user permissions
         user login
         user logout
         homepage
-        create guild
+        create guild   
         edit guild
         edit character profile
         character page 

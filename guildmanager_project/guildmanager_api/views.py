@@ -5,11 +5,26 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .models import Guild, Game, Char
 from .models import AppUser as User
-from .serializers import GuildSerializer
+from .serializers import CharSerializer, GuildSerializer
+import os
+import requests
+import schedule
+from dotenv import load_dotenv
+load_dotenv()
 
+def battle_key():
+    payload_params = {"grant_type": "client_credentials", "scope": "public"}
+
+    token_req = requests.post('https://eu.battle.net/oauth/token', params=payload_params, auth=(str(os.getenv('VITE_client_id')),str(os.getenv('VITE_client_secret'))))
+    token = token_req.json()['access_token']
+    print(token)
+
+    return token
+token = battle_key()
 
 def index(request): 
-    print('home!')
+    print('something')
+    print(str(os.getenv('SECRET_KEY')))
     index = open('static/index.html').read()
     return HttpResponse(index)
 
@@ -77,3 +92,31 @@ def guild(request):
         #     print('success', serializer.is_valid())
         #     serializer.save(game=[2])
         return Response('hello')
+
+@api_view(['GET','POST','PUT','DELETE'])
+def char(request):
+    if request.method == 'GET':
+        char = Char.objects.all()
+        serializer = CharSerializer(char, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        print(request.data)
+        char = Char(name=request.data['name'],faction=request.data['faction'],spec=request.data['spec'], server=request.data['server'], role=request.data['role'])
+        char.save()
+        char.game.set([2])
+        char.guild.set([request.data['guild']])
+        char.save()
+        return Response('Post worked')
+
+@api_view(['GET','POST'])
+def leaderboard(request):
+     
+    season = 27
+    bracket = 'rbg'
+    response = requests.get(f'https://eu.api.blizzard.com/data/wow/pvp-season/{season}/pvp-leaderboard/{bracket}',params={'namespace':"dynamic-eu", 'locale':"en_US", 'access_token':{token}})
+    
+    resp = response.json()
+    respl = resp['entries'][:10]
+    
+    
+    return Response(respl)

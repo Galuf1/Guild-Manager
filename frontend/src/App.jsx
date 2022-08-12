@@ -5,6 +5,9 @@ import HomePage from './pages/HomePage'
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage' 
 import ManagerPage from './pages/ManagerPage'
+import CharacterPage from './pages/CharacterPage'
+import ApiPage from './pages/ApiPage'
+import NewsPage from './pages/NewsPage'
 
 
 function App() {
@@ -18,6 +21,9 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path='/guild' element={<ManagerPage />} />
+          <Route path='/char' element={<CharacterPage />} />
+          <Route path='/api' element={<ApiPage />} />
+          <Route path='/news' element={<NewsPage />} />
         </Routes>
       </Router>
     </div>

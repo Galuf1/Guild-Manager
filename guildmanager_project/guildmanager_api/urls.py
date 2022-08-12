@@ -8,4 +8,6 @@ urlpatterns = [
     path('login', views.log_in),
     path('logout', views.log_out),
     path('guild', views.guild),
+    path('char', views.char),
+    path('leaderboard',views.leaderboard),
 ]
