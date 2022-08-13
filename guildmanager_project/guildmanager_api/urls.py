@@ -10,4 +10,5 @@ urlpatterns = [
     path('guild', views.guild),
     path('char', views.char),
     path('leaderboard',views.leaderboard),
+    path('news',views.news),
 ]

@@ -1,26 +1,29 @@
 import axios from "axios";
+import { useState , useEffect} from "react";
 import Button from "react-bootstrap/esm/Button";
+import NewsFormat from "../components/NewsFormat";
 
 function NewsPage() {
-    
-    const gameSpot =() => {
+    const [news, setNews] = useState(null)
+
+    const newsGet = () => {
         axios.request({
-            url: "http://www.gamespot.com/api/games/",
-            method: "get",
-            params: {
-            api_key: import.meta.env.VITE_api_key,
-            name:'worldofwarcraft' 
-            }
-        }).then(response => {
-            console.log(response)
+            url:'/news',
+            method:'get'
+        }).then((response)=> {
+            setNews(response.data.results)
         })
     }
+    useEffect(()=> {
+        newsGet()
+    },[])
+
+   
 
 
     return (
         <section>
-            <h1>Hello</h1>
-            <Button onClick={gameSpot}>fetch news</Button>
+            {news && <NewsFormat data={news} />}            
         </section>
     )
 

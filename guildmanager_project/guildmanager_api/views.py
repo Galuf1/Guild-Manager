@@ -120,3 +120,13 @@ def leaderboard(request):
     
     
     return Response(respl)
+
+@api_view(['GET'])
+def news(request):
+    api_key = str(os.getenv('VITE_api_key'))
+    url = f'https://www.gamespot.com/api/articles/?api_key={api_key}&filter=association:5000-3919&format=json&limit=2&sort=publish_date:desc'
+    headers = {'User-Agent':'its me'}
+    response = requests.get(url,headers=headers)
+    ponse = response.json()
+    print(response.status_code)
+    return Response(ponse)
