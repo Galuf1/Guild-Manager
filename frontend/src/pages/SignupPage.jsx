@@ -23,6 +23,10 @@ function SignupPage() {
        
         <form onSubmit={handleSubmit} >
             <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="Username" placeholder="Enter Username" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control type="email" placeholder="Enter Email" />
                 <Form.Text className="text-muted">

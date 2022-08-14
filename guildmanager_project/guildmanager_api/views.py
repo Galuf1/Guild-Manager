@@ -17,14 +17,11 @@ def battle_key():
 
     token_req = requests.post('https://eu.battle.net/oauth/token', params=payload_params, auth=(str(os.getenv('VITE_client_id')),str(os.getenv('VITE_client_secret'))))
     token = token_req.json()['access_token']
-    print(token)
 
     return token
 token = battle_key()
 
 def index(request): 
-    print('something')
-    print(str(os.getenv('SECRET_KEY')))
     index = open('static/index.html').read()
     return HttpResponse(index)
 
@@ -84,7 +81,7 @@ def guild(request):
         print(request.data)
         guild = Guild(name=request.data['name'],faction=request.data['faction'], server=request.data['server'], description_short=request.data['description_short'], description_full=request.data['description_full'])
         guild.save()
-        guild.game.set([2])
+        guild.game.set([int(request.data['game'])])
         guild.save()
         # serializer = GuildSerializer(data=request.data)
         # print(serializer)

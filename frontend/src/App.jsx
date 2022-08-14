@@ -4,10 +4,11 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/LoginPage' 
-import ManagerPage from './pages/ManagerPage'
+import GuildPage from './pages/GuildPage'
 import CharacterPage from './pages/CharacterPage'
 import ApiPage from './pages/ApiPage'
 import NewsPage from './pages/NewsPage'
+import NavBar from './components/Navbar'
 
 
 function App() {
@@ -15,12 +16,13 @@ function App() {
 
   return (
     <div className="App">
+      <NavBar />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage user={user} />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path='/guild' element={<ManagerPage />} />
+          <Route path='/guild' element={<GuildPage />} />
           <Route path='/char' element={<CharacterPage />} />
           <Route path='/api' element={<ApiPage />} />
           <Route path='/news' element={<NewsPage />} />
