@@ -9,6 +9,7 @@ import CharacterPage from './pages/CharacterPage'
 import ApiPage from './pages/ApiPage'
 import NewsPage from './pages/NewsPage'
 import NavBar from './components/Navbar'
+import Dashboard from './pages/Dashboard'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path='/char' element={<CharacterPage />} />
           <Route path='/api' element={<ApiPage />} />
           <Route path='/news' element={<NewsPage />} />
+          <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
       </Router>
     </div>

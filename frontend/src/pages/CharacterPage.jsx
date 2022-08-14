@@ -33,22 +33,43 @@ function CharacterPage ({user}) {
                 
                 <Form.Group className="mb-3" controlId="factionControl">
                     <Form.Label>Faction</Form.Label>
-                    <Form.Control type="text" placeholder="Faction" />
+                    <Form.Select id="factionSelect">
+                        <option value="ALLIANCE">Alliance</option>
+                        <option value="HORDE">Horde</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="specControl">
                     <Form.Label>Spec</Form.Label>
-                    <Form.Control type="text" placeholder="Spec" />
+                    <Form.Select id="specSelect">
+                        <option value="DPS">DPS</option>
+                        <option value="TANK">Tank</option>
+                        <option value="HEALER">Healer</option>
+                        <option value="HYBRID">Hybrid</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="serverControl">
                     <Form.Label>Server</Form.Label>
-                    <Form.Control type="text" placeholder="Server" />
+                    <Form.Select id="serverSelect">
+                        <option value="AMNENNAR">Amnennar</option>
+                        <option value="ASHBRINGER">Ashbringer</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="roleControl">
                     <Form.Label>Role</Form.Label>
-                    <Form.Control type='text' placeholder='Role' />
+                    <Form.Select id="roleSelect">
+                        <option value="DRUID">Druid</option>
+                        <option value="HUNTER">Hunter</option>
+                        <option value="MAGE">Mage</option>
+                        <option value="PALADIN">Paladin</option>
+                        <option value="PRIEST">Priest</option>
+                        <option value="ROGUE">Rogue</option>
+                        <option value="SHAMAN">Shaman</option>
+                        <option value="WARLOCK">Warlock</option>
+                        <option value="WARRIOR">Warrior</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="guildControl">
@@ -58,7 +79,10 @@ function CharacterPage ({user}) {
 
                 <Form.Group className="mb-3" controlId="gameControl">
                     <Form.Label>Game</Form.Label>
-                    <Form.Control type='text' placeholder='Game' />
+                    <Form.Select id="gameSelect">
+                        <option value="2" >World of Warcraft</option>
+                        <option value="3">Runescape</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">

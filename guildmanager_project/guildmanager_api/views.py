@@ -100,7 +100,7 @@ def char(request):
         print(request.data)
         char = Char(name=request.data['name'],faction=request.data['faction'],spec=request.data['spec'], server=request.data['server'], role=request.data['role'])
         char.save()
-        char.game.set([2])
+        char.game.set([int(request.data['game'])])
         char.guild.set([request.data['guild']])
         char.save()
         return Response('Post worked')
