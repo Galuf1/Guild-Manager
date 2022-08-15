@@ -5,17 +5,7 @@ import NewsFormat from "../components/NewsFormat";
 
 
 function Dashboard () {
-    const [ladder, setLadder] = useState(null)
     const [news, setNews] = useState(null)
-    
-    const getLadder = () => {
-        axios.request({
-            url: '/leaderboard',
-            method: 'get'
-        }).then(response => {
-            setLadder(response.data)
-        })
-    }
     
     const getNews = () => {
         axios.request({
@@ -26,18 +16,12 @@ function Dashboard () {
         })
     }
     useEffect(()=> {
-            getLadder()
-        },[])
-    useEffect(()=> {
         getNews()
     },[])    
 
 
     return (
         <section>
-            <div>
-                {ladder && <LadderRow data={ladder} />}
-            </div>
             <div>
                 {news && <NewsFormat data={news} />} 
             </div>
