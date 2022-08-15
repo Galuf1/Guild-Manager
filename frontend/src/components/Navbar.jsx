@@ -3,8 +3,9 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import logo from '../assets/logo.png'
+import Logout from './Logout'
 
-function NavBar () {
+function NavBar ({user, whoami}) {
 
     return (
         <Navbar bg="light" expand="lg" >
@@ -22,6 +23,9 @@ function NavBar () {
                     </Nav>
                     <Nav className='me-auto'>
                         <Nav.Link href="/#/signup">Signup</Nav.Link>
+                    </Nav>
+                    <Nav className='me-auto'>
+                        <Logout whoami={whoami} user={user}/>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -5,17 +5,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from "react";
 
 function LoginPage() {
-    let navigate = useNavigate()
+
     
 
    
     const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log(event)
         axios.post('/login', {
             'email': event.target[0].value,
             'password': event.target[1].value
         }).then((response) => {
             console.log('wat you are in react')
-            navigate('/')
+
         })
     }
 

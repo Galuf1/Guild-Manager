@@ -1,7 +1,10 @@
 import { useState , useEffect} from "react"
 import axios from "axios"
-import LadderRow from "../components/LadderRow";
 import NewsFormat from "../components/NewsFormat";
+import SideBar from "../components/Sidebar";
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 
 function Dashboard () {
@@ -21,10 +24,17 @@ function Dashboard () {
 
 
     return (
-        <section>
-            <div>
-                {news && <NewsFormat data={news} />} 
-            </div>
+        <section>            
+            <Container>
+                <Row>
+                    <Col>
+                        <SideBar />
+                    </Col>
+                    <Col>
+                        {news && <NewsFormat data={news} />} 
+                    </Col>
+                </Row>                
+            </Container>
         </section>
 
     )

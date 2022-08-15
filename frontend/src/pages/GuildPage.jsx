@@ -8,6 +8,7 @@ function GuildPage ({user}) {
     let navigate = useNavigate()
 
     const handleSubmit = (event) => {
+        event.preventDefault()
         axios.post('/guild', {
             'name': event.target[0].value,
             'game': event.target[1].value,

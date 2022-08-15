@@ -44,11 +44,13 @@ def sign_up(request):
 
 @api_view(['POST'])
 def log_in(request):
-    print('YOU ARE IN THE LOG IN VIEW ON DJANGO')
+    # print('YOU ARE IN THE LOG IN VIEW ON DJANGO')
+    print(dir(request))
     email = request.data['email']
     password = request.data['password']
+    print(email, password, 'wat')
     user = authenticate(username=email, password=password)
-    print('login on django side!', user.email, user.password)
+    print('login on django side!', user)
 
     if user is not None:
         if user.is_active:
@@ -69,6 +71,14 @@ def log_out(request):
     logout(request)
     print('USER IS LOGGED OUT!')
     return HttpResponseRedirect('/') 
+
+@api_view(['GET'])
+def whoami(request):
+    if request.user.is_authenticated:
+        data = serializers.serialize("json", [request.user], fields=['email', 'username'])
+        return HttpResponse(data)
+    else:
+        return JsonResponse({'user':None})
 
 @api_view(['GET','POST','PUT','DELETE'])
 def guild(request):

@@ -8,6 +8,7 @@ function CharacterPage ({user}) {
     let navigate = useNavigate()
 
     const handleSubmit = (event) => {
+        event.preventDefault()
         axios.post('/char', {
             'name': event.target[0].value,
             'faction': event.target[1].value,

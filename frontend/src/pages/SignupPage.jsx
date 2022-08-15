@@ -4,19 +4,26 @@ import Button from 'react-bootstrap/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from "react";
 
-function SignupPage() {
-    let navigate = useNavigate()
+function SignupPage({user, setUser}) {
     
 
    
     const handleSubmit = (event) => {
+        event.preventDefault()
         axios.post('/signup', {
-            'email': event.target[0].value,
-            'password': event.target[1].value
+            'email': event.target[1].value,
+            'password': event.target[2].value
         }).then((response) => {
-            console.log('wat you are in react')
-            navigate('/')
+            if(response.data.success === true) {
+                signUp()
+            } 
         })
+    }
+
+
+    const signUp = () => {
+        setUser(!user)
+        console.log(user)
     }
 
     return (

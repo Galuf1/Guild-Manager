@@ -8,16 +8,11 @@ function HomePage ({user}) {
 
     return (
         <div>
-            {/* <NavBar /> */}
             <section className='landingDiv' style={{backgroundImage: `url(${backimage})`}}>            
                 <h1>Guild Manager</h1>
-                <Link to="/guild">Guild</Link>
-                <br />
-                <Link to="/char">Char</Link>
-                <br />
-                <Link to="/api">Api</Link>
-                <br />
-                <Link to="/news">News</Link>
+                {user
+                ? <h2>Hello {user}</h2>
+                : <Link to="/signup">LINK</Link>}
             </section>
         </div>
     )
