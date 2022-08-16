@@ -115,21 +115,46 @@ def guild(request):
             return Response('create guild successful')
         except:
             return Response('create didnt work')
+    elif request.method == 'PUT':
+        # user_guild = User.objects.get(id=request.data['guild_master'])
+        id = request.user
+        user_id = id.id
+        guild = Guild.objects.get(guild_master=user_id)
+        guild.name = request.data['name']
+        guild.faction = request.data['faction']
+        guild.server = request.data['server']
+        guild.description_short = request.data['description_short']
+        guild.description_full = request.data['description_full']
+        guild.save()
+
+        return Response('edit successful')
 
 @api_view(['GET','POST','PUT','DELETE'])
 def char(request):
     if request.method == 'GET':
-        char = Char.objects.all()
-        serializer = CharSerializer(char, many=True)
-        return Response(serializer.data)
+        # print('get request')
+        try:
+            id = request.user
+            user_id = id.id
+            char = Char.objects.get(user=user_id)
+            print(char)
+            serializer = CharSerializer(char)
+            return Response(serializer.data)
+        except:
+            return Response('No Char for user')
+
     elif request.method == 'POST':
         print(request.data)
-        char = Char(name=request.data['name'],faction=request.data['faction'],spec=request.data['spec'], server=request.data['server'], role=request.data['role'])
-        char.save()
-        char.game.set([int(request.data['game'])])
-        char.guild.set([request.data['guild']])
-        char.save()
-        return Response('Post worked')
+        try:
+            user_char = User.objects.get(id=request.data['user'])
+            char = Char(name=request.data['name'],faction=request.data['faction'],spec=request.data['spec'], server=request.data['server'], role=request.data['role'], user=user_char)
+            char.save()
+            char.game.set([int(request.data['game'])])
+            char.guild.set([request.data['guild']])
+            char.save()
+            return Response('Post worked')
+        except: 
+            return Response('char post didnt work')
 
 @api_view(['GET','POST'])
 def leaderboard(request):

@@ -1,7 +1,7 @@
 
 
 function NewsFormat({data}) {
-    console.log(data)
+    // console.log(data)
     return (
         <div>
             <h2>World of Warcraft News</h2>

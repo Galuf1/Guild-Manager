@@ -70,3 +70,4 @@ class Char(models.Model):
     role = models.TextField(choices=ROLE, default='Druid')
     guild = models.ManyToManyField(Guild)
     game = models.ManyToManyField(Game)
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE, default=1)

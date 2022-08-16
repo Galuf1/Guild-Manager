@@ -21,7 +21,7 @@ axios.defaults.headers.common['X-CSRFToken'] = csrftoken
 function App() {
     const [user, setUser] = useState({})
     const [guild, setGuild] = useState({})
-    const [char, setChar] = useState(null)
+    const [char, setChar] = useState({})
     
     const whoAmI = async () => {
       const response = await axios.get('/whoami')
@@ -39,14 +39,25 @@ function App() {
   const getGuild = (currentid) => {
     axios.get('/guild', {
     }).then((response)=> {
-        console.log('get guild response',response)
+        // console.log('get guild response',response)
         setGuild(response.data)
     })
-}
+  }
 
-useEffect (()=> {
-    getGuild()
-},[]) 
+  useEffect (()=> {
+      getGuild()
+  },[]) 
+
+  const getChar = (currentid) => {
+    axios.get('/char', {
+    }).then((response)=> {
+        console.log('get char response',response)
+        setChar(response.data)
+    })
+  }
+  useEffect (()=> {
+    getChar()
+  },[]) 
 
   return (
     <div className="App">
@@ -58,7 +69,7 @@ useEffect (()=> {
           <Route path="/signup" element={<SignupPage user={user.email} setUser={setUser}/>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path='/guild' element={<GuildPage user={user} guild={guild}/>} />
-          <Route path='/char' element={<CharacterPage />} />
+          <Route path='/char' element={<CharacterPage user={user} char={char}/>} />
           <Route path='/api' element={<ApiPage />} />
           <Route path='/news' element={<NewsPage />} />
           <Route path='/dashboard' element={<Dashboard user={user} guild={guild}/>} />
