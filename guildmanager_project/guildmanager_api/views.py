@@ -48,7 +48,7 @@ def log_in(request):
     print(dir(request))
     email = request.data['email']
     password = request.data['password']
-    print(email, password, 'wat')
+    # print(email, password, 'wat')
     user = authenticate(username=email, password=password)
     print('login on django side!', user)
 
@@ -75,30 +75,46 @@ def log_out(request):
 @api_view(['GET'])
 def whoami(request):
     if request.user.is_authenticated:
-        data = serializers.serialize("json", [request.user], fields=['email', 'username'])
-        return HttpResponse(data)
+        print('user authenticated')
+        try:
+            user = User.objects.get(email= request.user.email)
+            print(user)
+            if user:
+                return JsonResponse({'email': request.user.email, 'user': user.id})
+        except:
+            return JsonResponse({'email': request.user.email, 'user': False})
+
     else:
         return JsonResponse({'user':None})
 
 @api_view(['GET','POST','PUT','DELETE'])
 def guild(request):
     if request.method == 'GET':
-        guild = Guild.objects.all()
-        serializer = GuildSerializer(guild, many=True)
-        return Response(serializer.data)
+        try:
+            id = request.user
+            user_id = id.id
+            guild = Guild.objects.get(guild_master=user_id)
+            serializer = GuildSerializer(guild)
+            return Response(serializer.data)
+        except:
+            return Response('No Guild for user')
 
     elif request.method == 'POST':
         print(request.data)
-        guild = Guild(name=request.data['name'],faction=request.data['faction'], server=request.data['server'], description_short=request.data['description_short'], description_full=request.data['description_full'])
-        guild.save()
-        guild.game.set([int(request.data['game'])])
-        guild.save()
+        try:
+            user_guild = User.objects.get(id=request.data['guild_master'])        
+            guild = Guild(name=request.data['name'],faction=request.data['faction'], server=request.data['server'], description_short=request.data['description_short'], description_full=request.data['description_full'], guild_master=user_guild)
+            guild.save()
+            guild.game.set([int(request.data['game'])])
+            guild.save()
         # serializer = GuildSerializer(data=request.data)
         # print(serializer)
         # if serializer.is_valid():
         #     print('success', serializer.is_valid())
         #     serializer.save(game=[2])
-        return Response('hello')
+            return Response('create guild successful')
+        except:
+            return Response('create didnt work')
 
 @api_view(['GET','POST','PUT','DELETE'])
 def char(request):

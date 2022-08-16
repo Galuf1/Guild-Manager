@@ -7,9 +7,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 
-function Dashboard () {
+function Dashboard ({user, guild}) {
     const [news, setNews] = useState(null)
-    
+      
     const getNews = () => {
         axios.request({
             url: '/news',
@@ -20,7 +20,8 @@ function Dashboard () {
     }
     useEffect(()=> {
         getNews()
-    },[])    
+    },[])
+    
 
 
     return (
@@ -28,7 +29,7 @@ function Dashboard () {
             <Container>
                 <Row>
                     <Col>
-                        <SideBar />
+                        <SideBar user={user} guild={guild}/>
                     </Col>
                     <Col>
                         {news && <NewsFormat data={news} />} 

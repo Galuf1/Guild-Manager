@@ -19,14 +19,14 @@ const csrftoken = GetCookie('csrftoken');
 axios.defaults.headers.common['X-CSRFToken'] = csrftoken
 
 function App() {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState({})
+    const [guild, setGuild] = useState({})
+    const [char, setChar] = useState(null)
     
     const whoAmI = async () => {
       const response = await axios.get('/whoami')
-      console.log(response.data)
-      const newUser = response.data && response.data.email
-      if (response.data.user==='True') {
-        console.log(response)
+      const newUser = {'user':response.data.user, 'email': response.data.email}
+      if (response.data.user) {
         setUser(newUser)
       }
       
@@ -34,22 +34,34 @@ function App() {
 
   useEffect(()=> {
     whoAmI()
-  },[])  
+  },[]) 
+  
+  const getGuild = (currentid) => {
+    axios.get('/guild', {
+    }).then((response)=> {
+        console.log('get guild response',response)
+        setGuild(response.data)
+    })
+}
+
+useEffect (()=> {
+    getGuild()
+},[]) 
 
   return (
     <div className="App">
-      {user && <p>welcome, {user.email}</p>}
+      {user && <p>welcome, {user.email} </p>}
       <NavBar whoami={whoAmI} user={user}  />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage user={user} setUser={setUser}/>} />
-          <Route path="/signup" element={<SignupPage user={user} setUser={setUser}/>} />
+          <Route path="/signup" element={<SignupPage user={user.email} setUser={setUser}/>} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path='/guild' element={<GuildPage />} />
+          <Route path='/guild' element={<GuildPage user={user} guild={guild}/>} />
           <Route path='/char' element={<CharacterPage />} />
           <Route path='/api' element={<ApiPage />} />
           <Route path='/news' element={<NewsPage />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Dashboard user={user} guild={guild}/>} />
         </Routes>
       </Router>
     </div>

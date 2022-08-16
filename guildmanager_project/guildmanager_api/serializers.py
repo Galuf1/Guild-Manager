@@ -6,10 +6,10 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         fields = '__all__'
 class GuildSerializer(serializers.ModelSerializer):
-    gameid = GameSerializer(many=True)
+    # gameid = GameSerializer(many=True)
     class Meta:
         model = Guild
-        fields = ('name', 'gameid','faction', 'server', 'description_short', 'description_full' )
+        fields = '__all__'
 class CharSerializer(serializers.ModelSerializer):
     class Meta:
         model = Char

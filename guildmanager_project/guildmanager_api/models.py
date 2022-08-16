@@ -58,6 +58,7 @@ class Guild(models.Model):
     server = models.TextField(choices=SERVER, default='Ashbringer')
     description_short = models.TextField(default="New Guild")
     description_full = models.TextField(default="Guild description")
+    guild_master = models.ForeignKey(AppUser, on_delete=models.CASCADE, default=1)
 
 
 
