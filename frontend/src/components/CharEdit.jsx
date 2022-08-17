@@ -19,14 +19,14 @@ function CharEdit ({user, char}) {
             'game': event.target[6].value
             
         }).then((response) => {
-            console.log('wat you are in react')
+            console.log(response)
             navigate('/')
         })
     }
 
     return (
         <section>
-            <h1>edit</h1>
+            <h1>Edit my Character</h1>
             <form onSubmit={handleSubmit} >
                 <Form.Group className="mb-3" controlId="charName">
                     <Form.Label>Character Name: {char.name}</Form.Label>

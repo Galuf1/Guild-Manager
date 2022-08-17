@@ -11,12 +11,10 @@ function LoginPage() {
    
     const handleSubmit = (event) => {
         event.preventDefault()
-        // console.log(event)
         axios.post('/login', {
             'email': event.target[0].value,
             'password': event.target[1].value
         }).then((response) => {
-            console.log('wat you are in react')
             console.log(response)
 
         })

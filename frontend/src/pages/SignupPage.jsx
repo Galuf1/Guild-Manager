@@ -23,7 +23,6 @@ function SignupPage({user, setUser}) {
 
     const signUp = () => {
         setUser(!user)
-        console.log(user)
     }
 
     return (

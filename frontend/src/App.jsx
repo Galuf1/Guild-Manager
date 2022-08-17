@@ -39,7 +39,6 @@ function App() {
   const getGuild = (currentid) => {
     axios.get('/guild', {
     }).then((response)=> {
-        // console.log('get guild response',response)
         setGuild(response.data)
     })
   }

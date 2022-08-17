@@ -26,7 +26,7 @@ function CharCreate ({user, char}) {
 
     return (
         <section>
-            <h1>create</h1>
+            <h1>Create a Character</h1>
             <form onSubmit={handleSubmit} >
                 <Form.Group className="mb-3" controlId="charName">
                     <Form.Label>Character Name</Form.Label>

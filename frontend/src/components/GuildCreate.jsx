@@ -19,7 +19,6 @@ function GuildCreate ({user, guild}) {
             'guild_master': user.user
             
         }).then((response) => {
-            console.log('create Guild response')
             navigate('/')
         })
     }
@@ -27,6 +26,7 @@ function GuildCreate ({user, guild}) {
     return (
 
         <section>
+            <h1>Create a new Guild</h1>
             <form onSubmit={handleSubmit} >
                 <Form.Group className="mb-3" controlId="guildName">
                     <Form.Label>Guild Name</Form.Label>

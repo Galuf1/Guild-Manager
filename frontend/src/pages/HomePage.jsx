@@ -4,7 +4,6 @@ import backimage from "../assets/background.jpg"
 import React from 'react'
 
 function HomePage ({user}) {
-    // console.log({user})
 
     return (
         <div>

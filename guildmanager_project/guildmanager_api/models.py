@@ -30,12 +30,6 @@ ROLE = (
     ("WARRIOR", "Warrior"),
 )
 
-# class _spec (models.TextChoices):
-#     DPS = 'DPS', _('DPS')
-#     TANK = 'Tank', _('Tank')
-#     HEALER = 'Healer', _('Healer')
-#     HYBRID = 'Hybrid', _('Hybrid')
-
 
 class AppUser(AbstractUser):
     email =  models.EmailField(

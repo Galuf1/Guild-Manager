@@ -6,7 +6,6 @@ class GameSerializer(serializers.ModelSerializer):
         model = Game
         fields = '__all__'
 class GuildSerializer(serializers.ModelSerializer):
-    # gameid = GameSerializer(many=True)
     class Meta:
         model = Guild
         fields = '__all__'

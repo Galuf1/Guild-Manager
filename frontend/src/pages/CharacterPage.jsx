@@ -7,14 +7,12 @@ import CharEdit from '../components/CharEdit'
 
 function CharacterPage ({user,char}) {
 
-    console.log('user in char', user)
-    console.log('char in char', typeof char)
 
+    const empty = char
 
     return (
         <section>
-            <CharCreate />
-            {/* {{char} ? <CharEdit user={user} char={char}/> : <CharCreate user={user} char={char}/>}  */}
+            {empty ? <CharEdit user={user} char={char}/> : <CharCreate user={user} char={char}/>} 
         </section>
     )
 }

@@ -3,8 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/esm/Button'
 import axios from 'axios'
 
-function GuildPage ({user, guild}) {
-    console.log('guild page guild', guild)
+function GuildEdit ({user, guild}) {
     let navigate = useNavigate()
 
     const handleSubmit = (event) => {
@@ -20,7 +19,6 @@ function GuildPage ({user, guild}) {
             'guild_id': guild.id
             
         }).then((response) => {
-            console.log('wat you are in react')
             navigate('/')
         })
     }
@@ -28,6 +26,7 @@ function GuildPage ({user, guild}) {
     return (
 
         <section>
+            <h1>Edit my Guild</h1>
             <form onSubmit={handleSubmit} >
                 <Form.Group className="mb-3" controlId="guildName">
                     <Form.Label>Guild Name: {guild.name}</Form.Label>
@@ -79,4 +78,4 @@ function GuildPage ({user, guild}) {
     )
 }
 
-export default GuildPage
+export default GuildEdit

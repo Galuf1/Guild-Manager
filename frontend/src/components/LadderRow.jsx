@@ -1,7 +1,6 @@
 import Table from 'react-bootstrap/Table'
 
 function LadderRow ({data}) {
-    console.log(data)
         
 
     return (

@@ -7,11 +7,11 @@ import GuildEdit from '../components/GuildEdit'
 
 function GuildPage ({user, guild}) {
    
-
+    const empty = guild
     return (
 
         <section>
-            {{guild} ? <GuildEdit user={user} guild={guild}/> : <GuildCreate user={user} guild={guild}/>}           
+            {empty ? <GuildEdit user={user} guild={guild}/> : <GuildCreate user={user} guild={guild}/>}           
         </section>
     )
 }

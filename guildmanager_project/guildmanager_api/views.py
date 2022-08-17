@@ -27,14 +27,13 @@ def index(request):
 
 @api_view(['POST','GET'])
 def sign_up(request):
-    print('signup is loading wtf')
+    print('signup is loading')
     if request.method == 'POST':
         try:
             new_user = User.objects.create_user(username=request.data['email'], password=request.data['password'], email=request.data['email'])
             new_user.full_clean
             new_user.save()
             return JsonResponse({'success':True})
-            # return HttpResponse({'success':'whatever'})
         except Exception as e:
             print('you got an error signing up!', str(e))
         return JsonResponse({'Success': False, 'reason': 'sign up failed'})
@@ -44,11 +43,9 @@ def sign_up(request):
 
 @api_view(['POST'])
 def log_in(request):
-    # print('YOU ARE IN THE LOG IN VIEW ON DJANGO')
     print(dir(request))
     email = request.data['email']
     password = request.data['password']
-    # print(email, password, 'wat')
     user = authenticate(username=email, password=password)
     print('login on django side!', user)
 
@@ -59,12 +56,12 @@ def log_in(request):
                 print(f"{email} is logged in")
                 return JsonResponse({'success': True}) 
             except Exception as e:
-                print('you got an error logging in!', str(e))
+                print('error logging in', str(e))
                 return JsonResponse({'success': False, 'reason': 'failed to login'})
         else:
-            return JsonResponse({'success': False, 'reason': 'account disabled'})
+            return JsonResponse({'success': False, 'reason': 'account not active'})
     else:
-        return JsonResponse({'success': False, 'reason': 'account doesn\'t exist'}) 
+        return JsonResponse({'success': False, 'reason': 'account credentials invalid'}) 
 
 @api_view(['POST'])
 def log_out(request):
@@ -97,7 +94,7 @@ def guild(request):
             serializer = GuildSerializer(guild)
             return Response(serializer.data)
         except:
-            return Response('No Guild for user')
+            return Response(False)
 
     elif request.method == 'POST':
         print(request.data)
@@ -107,16 +104,10 @@ def guild(request):
             guild.save()
             guild.game.set([int(request.data['game'])])
             guild.save()
-        # serializer = GuildSerializer(data=request.data)
-        # print(serializer)
-        # if serializer.is_valid():
-        #     print('success', serializer.is_valid())
-        #     serializer.save(game=[2])
             return Response('create guild successful')
         except:
             return Response('create didnt work')
     elif request.method == 'PUT':
-        # user_guild = User.objects.get(id=request.data['guild_master'])
         id = request.user
         user_id = id.id
         guild = Guild.objects.get(guild_master=user_id)
@@ -141,16 +132,17 @@ def char(request):
             serializer = CharSerializer(char)
             return Response(serializer.data)
         except:
-            return Response('No Char for user')
+            return Response(False)
 
     elif request.method == 'POST':
         print(request.data)
         try:
             user_char = User.objects.get(id=request.data['user'])
+
             char = Char(name=request.data['name'],faction=request.data['faction'],spec=request.data['spec'], server=request.data['server'], role=request.data['role'], user=user_char)
             char.save()
             char.game.set([int(request.data['game'])])
-            char.guild.set([request.data['guild']])
+            char.guild.set([int(request.data['guild'])])
             char.save()
             return Response('Post worked')
         except: 
