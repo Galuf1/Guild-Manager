@@ -7,13 +7,13 @@ import Logout from './Logout'
 import { useNavigate} from 'react-router-dom'
 
 function NavBar ({user, whoami}) {
-
+    let userp = user
     return (
         <Navbar bg="dark" expand="lg" >
             <Container fluid>
                 <Navbar.Brand href="/">
                     <img src={logo} alt="logo" width="50" height="50" className="d-inline-block align-top"/>
-                </Navbar.Brand>
+                </Navbar.Brand>              
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link className="text-light" href="/">Home</Nav.Link>
@@ -22,6 +22,11 @@ function NavBar ({user, whoami}) {
                     <Nav className='me-auto'>
                     </Nav>
                     <Nav className='me-auto'>
+                    <Navbar.Collapse className="justify-content-end">
+                <Navbar.Text className='text-light'>
+                {userp && `Signed in as ${userp.email}`}
+                </Navbar.Text>
+                </Navbar.Collapse>
                     </Nav>
                     <Nav className='me-auto'>
                         <Nav.Link className="text-light" href="/#/login">Login</Nav.Link>

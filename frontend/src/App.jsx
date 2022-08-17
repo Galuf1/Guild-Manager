@@ -62,7 +62,6 @@ function App() {
 
   return (
     <div className="App">
-      {user && <p>welcome, {user.email} </p>}
       <NavBar whoami={whoAmI} user={user}  />
       <Router>
         <Routes>
