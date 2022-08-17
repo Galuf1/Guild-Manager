@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import logo from '../assets/logo.png'
 import Logout from './Logout'
+import { useNavigate} from 'react-router-dom'
 
 function NavBar ({user, whoami}) {
 

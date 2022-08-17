@@ -1,12 +1,9 @@
 import axios from "axios";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { Link, useNavigate } from 'react-router-dom'
-import { useState } from "react";
+
 
 function LoginPage() {
-
-    
 
    
     const handleSubmit = (event) => {
@@ -16,6 +13,8 @@ function LoginPage() {
             'password': event.target[1].value
         }).then((response) => {
             console.log(response)
+            window.location = '/#/dashboard'
+            location.reload()
 
         })
     }

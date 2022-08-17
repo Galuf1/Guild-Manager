@@ -28,6 +28,8 @@ function App() {
       const newUser = {'user':response.data.user, 'email': response.data.email}
       if (response.data.user) {
         setUser(newUser)
+      } else {
+        setUser(false)
       }
       
     }
@@ -50,7 +52,7 @@ function App() {
   const getChar = (currentid) => {
     axios.get('/char', {
     }).then((response)=> {
-        console.log('get char response',response)
+        // console.log('get char response',response)
         setChar(response.data)
     })
   }

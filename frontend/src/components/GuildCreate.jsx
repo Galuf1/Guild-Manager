@@ -4,8 +4,7 @@ import Button from 'react-bootstrap/esm/Button'
 import axios from 'axios'
 
 function GuildCreate ({user, guild}) {
-    console.log('guild page guild', guild)
-    let navigate = useNavigate()
+
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -19,7 +18,8 @@ function GuildCreate ({user, guild}) {
             'guild_master': user.user
             
         }).then((response) => {
-            navigate('/')
+            window.location = '/#/dashboard'
+            location.reload()
         })
     }
 

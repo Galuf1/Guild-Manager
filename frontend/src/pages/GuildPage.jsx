@@ -6,12 +6,14 @@ import GuildCreate from '../components/GuildCreate'
 import GuildEdit from '../components/GuildEdit'
 
 function GuildPage ({user, guild}) {
-   
+   const user_logged = user
     const empty = guild
     return (
 
         <section>
-            {empty ? <GuildEdit user={user} guild={guild}/> : <GuildCreate user={user} guild={guild}/>}           
+            {user_logged ? (empty ? <GuildEdit user={user} guild={guild}/> : <GuildCreate user={user} guild={guild}/>) 
+            : <h1>Please Log In</h1>
+              }           
         </section>
     )
 }

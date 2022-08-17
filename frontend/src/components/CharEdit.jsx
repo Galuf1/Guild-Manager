@@ -5,7 +5,6 @@ import axios from 'axios'
 
 function CharEdit ({user, char}) {
 
-    let navigate = useNavigate()
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -20,7 +19,8 @@ function CharEdit ({user, char}) {
             
         }).then((response) => {
             console.log(response)
-            navigate('/')
+            window.location = '/#/dashboard'
+            location.reload()
         })
     }
 

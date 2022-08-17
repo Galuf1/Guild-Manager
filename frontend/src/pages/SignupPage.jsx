@@ -1,8 +1,6 @@
 import axios from "axios";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { Link, useNavigate } from 'react-router-dom'
-import { useState } from "react";
 
 function SignupPage({user, setUser}) {
     
@@ -16,6 +14,9 @@ function SignupPage({user, setUser}) {
         }).then((response) => {
             if(response.data.success === true) {
                 signUp()
+                window.location.assign("/#/login")
+                window.location.reload()
+
             } 
         })
     }

@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.core import serializers
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .models import Guild, Game, Char
@@ -82,8 +83,7 @@ def whoami(request):
             return JsonResponse({'email': request.user.email, 'user': False})
 
     else:
-        return JsonResponse({'user':None})
-
+        return Response(False)
 @api_view(['GET','POST','PUT','DELETE'])
 def guild(request):
     if request.method == 'GET':
@@ -123,7 +123,6 @@ def guild(request):
 @api_view(['GET','POST','PUT','DELETE'])
 def char(request):
     if request.method == 'GET':
-        # print('get request')
         try:
             id = request.user
             user_id = id.id
@@ -151,7 +150,7 @@ def char(request):
 @api_view(['GET','POST'])
 def leaderboard(request):
      
-    season = 27
+    season = 33
     bracket = 'rbg'
     response = requests.get(f'https://eu.api.blizzard.com/data/wow/pvp-season/{season}/pvp-leaderboard/{bracket}',params={'namespace':"dynamic-eu", 'locale':"en_US", 'access_token':{token}})
     

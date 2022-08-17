@@ -7,12 +7,15 @@ import CharEdit from '../components/CharEdit'
 
 function CharacterPage ({user,char}) {
 
-
+    const user_logged = user
     const empty = char
 
     return (
         <section>
-            {empty ? <CharEdit user={user} char={char}/> : <CharCreate user={user} char={char}/>} 
+            {user_logged ? (empty ? <CharEdit user={user} char={char}/> : <CharCreate user={user} char={char}/>) : <h1>Please Log in</h1> 
+        
+
+            }
         </section>
     )
 }

@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/esm/Button'
 import axios from 'axios'
 
 function CharCreate ({user, char}) {
-    let navigate = useNavigate()
+
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -20,7 +20,8 @@ function CharCreate ({user, char}) {
             
         }).then((response) => {
             console.log('create char', response)
-            navigate('/')
+            window.location = '/#/dashboard'
+            location.reload()
         })
     }
 

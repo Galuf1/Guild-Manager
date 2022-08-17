@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/esm/Button'
 import axios from 'axios'
 
 function GuildEdit ({user, guild}) {
-    let navigate = useNavigate()
+
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -19,7 +19,8 @@ function GuildEdit ({user, guild}) {
             'guild_id': guild.id
             
         }).then((response) => {
-            navigate('/')
+            window.location = '/#/dashboard'
+            location.reload()
         })
     }
 
