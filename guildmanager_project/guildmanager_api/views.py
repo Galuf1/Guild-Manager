@@ -146,6 +146,18 @@ def char(request):
             return Response('Post worked')
         except: 
             return Response('char post didnt work')
+    elif request.method == 'PUT':
+        id = request.user
+        user_id = id.id
+        char = Char.objects.get(user=user_id)
+        char.name = request.data['name']
+        char.faction = request.data['faction']
+        char.spec = request.data['spec']
+        char.server = request.data['server']
+        char.role = request.data['role']
+        char.save()
+
+        return Response('edit successful')
 
 @api_view(['GET','POST'])
 def leaderboard(request):

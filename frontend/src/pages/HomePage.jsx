@@ -1,17 +1,17 @@
 import {Link} from 'react-router-dom'
 import NavBar from '../components/Navbar'
 import backimage from "../assets/background.jpg"
+import logobig from '../assets/logo_transparent.png'
 import React from 'react'
 
 function HomePage ({user}) {
 
     return (
         <div>
-            <section className='landingDiv' style={{backgroundImage: `url(${backimage})`}}>            
-                <h1>Guild Manager</h1>
-                {user.email
-                ? <h2>Hello {user.email}</h2>
-                : <Link to="/signup">LINK</Link>}
+            <section className='landingDiv' >
+                <div id='logoWrapper'>
+                    <img src={logobig} />
+                </div>                
             </section>
         </div>
     )

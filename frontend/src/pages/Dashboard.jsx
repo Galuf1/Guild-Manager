@@ -25,8 +25,9 @@ function Dashboard ({user, guild}) {
 
 
     return (
-        <section>            
-            <Container>
+        <div>
+        <section className="landingDiv">            
+            <Container className="ms-0 me-0">
                 <Row>
                     <Col>
                         <SideBar user={user} guild={guild}/>
@@ -37,7 +38,7 @@ function Dashboard ({user, guild}) {
                 </Row>                
             </Container>
         </section>
-
+        </div>
     )
 }
 
